@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="zh-CN">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
-    <title>👔彼シャツシミュレーター</title>
+    <title>👔男友衬衫模拟器</title>
     <style>
-        body { font-family: 'Helvetica Neue', Arial, sans-serif; text-align: center; background: #fdf6e3; padding: 10px; color: #333; margin: 0; }
+        body { font-family: 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif; text-align: center; background: #fdf6e3; padding: 10px; color: #333; margin: 0; }
         .container { max-width: 500px; margin: 20px auto; background: white; padding: 20px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
         h1 { font-size: 1.5rem; margin-bottom: 10px; color: #444; }
         .description { font-size: 13px; color: #666; margin-bottom: 20px; line-height: 1.6; }
@@ -68,36 +68,36 @@
 <body>
 
 <div class="container">
-    <h1>👔彼シャツシミュレーター</h1>
+    <h1>👔男友衬衫模拟器</h1>
     <p class="description">
-        性別と身長を入力すると、彼シャツを着たときのサイズ感がわかります。<br>
-        <small>※あくまで目安だから参考程度にね😘</small>
+        输入性别与身高，就能知道穿上男友衬衫时的松紧感觉。<br>
+        <small>※只是估算值，看个大概就好哦😘</small>
     </p>
 
     <div class="controls">
         <div class="input-group group-a">
-            <strong>貸す人</strong>
-            <input type="text" id="nameA" placeholder="名前" oninput="update()" style="width:90px">
+            <strong>出借的一方</strong>
+            <input type="text" id="nameA" placeholder="名字" oninput="update()" style="width:90px">
             <select id="genderA" onchange="update()">
                 <option value="male">男</option>
                 <option value="female">女</option>
             </select>
-            <div><span class="hint">身長(cm)</span><input type="number" id="heightA" class="num-input" value="171.5" oninput="update()"></div>
+            <div><span class="hint">身高(cm)</span><input type="number" id="heightA" class="num-input" value="171.5" oninput="update()"></div>
             <div>
-                <span class="hint">シャツ色</span>
+                <span class="hint">衬衫颜色</span>
                 <input type="color" id="colorShirt" class="color-picker" value="#e3efff" oninput="update()">
             </div>
         </div>
         <div class="input-group group-b">
-            <strong>着る人</strong>
-            <input type="text" id="nameB" placeholder="名前" oninput="update()" style="width:90px">
+            <strong>穿着的一方</strong>
+            <input type="text" id="nameB" placeholder="名字" oninput="update()" style="width:90px">
             <select id="genderB" onchange="update()">
                 <option value="male">男</option>
                 <option value="female" selected>女</option>
             </select>
-            <div><span class="hint">身長(cm)</span><input type="number" id="heightB" class="num-input" value="158" oninput="update()"></div>
+            <div><span class="hint">身高(cm)</span><input type="number" id="heightB" class="num-input" value="158" oninput="update()"></div>
             <div>
-                <span class="hint">肌の色</span>
+                <span class="hint">肤色</span>
                 <input type="color" id="colorBody" class="color-picker" value="#ffcc99" oninput="update()">
             </div>
         </div>
@@ -108,17 +108,17 @@
     </div>
 
     <div class="share-area">
-        <button class="btn-share" onclick="shareOnX()">𝕏 で結果をシェアする</button>
+        <button class="btn-share" onclick="shareOnX()">𝕏 分享结果</button>
         
         <div class="other-tools-link">
-            <p style="font-size: 12px; color: #888; margin-bottom: 10px;">こちらもチェック❣🤩</p>
-            <a href="https://qwertyaz111.github.io/my-site-hub/">ツール・シミュレーター一覧</a>
+            <p style="font-size: 12px; color: #888; margin-bottom: 10px;">顺便也看看这些❣🤩</p>
+            <a href="https://qwertyaz111.github.io/my-site-hub/">工具・模拟器合集</a>
     
         </div>
 
         <div class="license-text">
-            スクショ投稿や加工、トレース等はご自由にお楽しみください。<br>
-            ※営利目的や商用利用はご遠慮ください。
+            截图分享、二次加工、临摹描图等都可以随意使用。<br>
+            ※请勿用于营利、商业用途。
         </div>
     </div>
 </div>
@@ -212,13 +212,80 @@ function update() {
 }
 
 function shareOnX() {
-    const text = encodeURIComponent(`${document.getElementById('nameA').value || '彼'}(${document.getElementById('heightA').value}cm)のシャツを${document.getElementById('nameB').value || '私'}(${document.getElementById('heightB').value}cm)が着てみた！\n#彼シャツシミュレーター\n`);
+    const text = encodeURIComponent(`${document.getElementById('nameA').value || '他'}(${document.getElementById('heightA').value}cm) 的衬衫，给 ${document.getElementById('nameB').value || '我'}(${document.getElementById('heightB').value}cm) 试穿了一下！\n#男友衬衫模拟器\n`);
     const url = encodeURIComponent(window.location.href);
     window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank');
 }
 
 window.onload = update;
 window.onresize = update;
+</script>
+
+<script>
+/* 设置持久化：名字・身高・颜色等会记住，刷新后自动恢复 */
+(function () {
+  var KEY = 'simSettings:' + location.pathname;
+  var SKIP = { seek: 1, pVol: 1 };
+  function list() {
+    var els = document.querySelectorAll('input,select,textarea'), out = [], i, el;
+    for (i = 0; i < els.length; i++) {
+      el = els[i];
+      if (el.type === 'file' || el.type === 'button' || el.type === 'submit' || el.type === 'reset') continue;
+      if (el.id && SKIP[el.id]) continue;
+      out.push(el);
+    }
+    return out;
+  }
+  function keyOf(el) {
+    if (el.id) return 'id:' + el.id;
+    var cn = (el.className || '').split(/\s+/)[0];
+    if (!cn) return null;
+    var sibs = document.querySelectorAll(el.tagName.toLowerCase() + '[class~="' + cn + '"]'), i;
+    for (i = 0; i < sibs.length; i++) if (sibs[i] === el) return 'cls:' + cn + ':' + i;
+    return null;
+  }
+  function get(el) {
+    return (el.type === 'checkbox' || el.type === 'radio') ? el.checked : el.value;
+  }
+  function set(el, v) {
+    var i;
+    if (el.tagName === 'SELECT') {
+      var ok = false;
+      for (i = 0; i < el.options.length; i++) if (el.options[i].value === v) ok = true;
+      if (!ok) return;
+    }
+    if (el.type === 'checkbox' || el.type === 'radio') el.checked = !!v;
+    else el.value = v;
+  }
+  function fire(el, type) {
+    try { el.dispatchEvent(new Event(type, { bubbles: true })); } catch (e) {}
+  }
+  function restore() {
+    var raw = null, data = null, els, k, i;
+    try { raw = localStorage.getItem(KEY); } catch (e) { return; }
+    if (!raw) return;
+    try { data = JSON.parse(raw); } catch (e) { return; }
+    els = list();
+    for (i = 0; i < els.length; i++) { k = keyOf(els[i]); if (k && data[k] !== undefined) set(els[i], data[k]); }
+    for (i = 0; i < els.length; i++) { fire(els[i], 'input'); fire(els[i], 'change'); }
+    for (i = 0; i < els.length; i++) { k = keyOf(els[i]); if (k && data[k] !== undefined) set(els[i], data[k]); }
+  }
+  var timer = null;
+  function save() {
+    if (timer) clearTimeout(timer);
+    timer = setTimeout(function () {
+      var els = list(), data = {}, k, i;
+      for (i = 0; i < els.length; i++) { k = keyOf(els[i]); if (k) data[k] = get(els[i]); }
+      try { localStorage.setItem(KEY, JSON.stringify(data)); } catch (e) {}
+    }, 200);
+  }
+  document.addEventListener('input', save, true);
+  document.addEventListener('change', save, true);
+  window.addEventListener('load', restore);
+  window.__simSettings = {
+    clear: function () { try { localStorage.removeItem(KEY); } catch (e) {} }
+  };
+})();
 </script>
 </body>
 </html>
